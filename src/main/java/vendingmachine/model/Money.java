@@ -20,12 +20,8 @@ public class Money implements Comparable<Money> {
         }
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void minus(int amount) {
-        this.amount -= amount;
+    public void minus(Money money) {
+        this.amount -= money.amount;
     }
 
     @Override

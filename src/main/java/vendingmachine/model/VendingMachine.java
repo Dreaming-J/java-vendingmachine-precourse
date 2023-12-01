@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 import static vendingmachine.message.ErrorMsg.ORDER_ERROR;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class VendingMachine {
         }
 
         stock.put(product, stock.get(product) - 1);
+        inputAmount.minus(product.price());
         return product;
     }
 
@@ -39,5 +41,28 @@ public class VendingMachine {
                 .filter(product -> Objects.equals(product.name(), name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ORDER_ERROR.toString()));
+    }
+
+    public boolean isOver() {
+        return isCantBuy() || isSoldOut();
+    }
+
+    private boolean isCantBuy() {
+        return findMinPrice().compareTo(inputAmount) > 0;
+    }
+
+    private boolean isSoldOut() {
+        return stock.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum() == 0;
+    }
+
+    private Money findMinPrice() {
+        return stock.keySet()
+                .stream()
+                .map(Product::price)
+                .min(Comparator.comparing(x -> x))
+                .get();
     }
 }
