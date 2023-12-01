@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-import static vendingmachine.message.ErrorMsg.PRICE_OF_PRODUCT_ERROR;
+import static vendingmachine.message.ErrorMsg.AMOUNT_ERROR;
 
 public record Product(String name, int price) {
 
@@ -13,7 +13,7 @@ public record Product(String name, int price) {
 
     private void validate(int price) {
         if (price < MIN_PRICE || price % UNIT_PRICE != 0) {
-            throw new IllegalArgumentException(PRICE_OF_PRODUCT_ERROR.toString());
+            throw new IllegalArgumentException(AMOUNT_ERROR.toString());
         }
     }
 }
