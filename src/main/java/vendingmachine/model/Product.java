@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-import static vendingmachine.Message.ErrorMsg.PRICE_OF_PRODUCT_ERROR;
+import static vendingmachine.message.ErrorMsg.PRICE_OF_PRODUCT_ERROR;
 
 public record Product(String name, int price) {
 

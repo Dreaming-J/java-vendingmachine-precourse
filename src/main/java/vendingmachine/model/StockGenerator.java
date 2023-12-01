@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-import static vendingmachine.Message.ErrorMsg.STOCK_ERROR;
+import static vendingmachine.message.ErrorMsg.STOCK_ERROR;
 import static vendingmachine.util.TypeConverter.toInt;
 
 import java.util.HashMap;

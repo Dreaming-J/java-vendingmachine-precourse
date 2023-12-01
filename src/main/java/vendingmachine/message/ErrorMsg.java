@@ -1,4 +1,4 @@
-package vendingmachine.Message;
+package vendingmachine.message;
 
 public enum ErrorMsg {
     CONVERTING_NUMBER_ERROR("유효하지 않은 숫자입니다. 다시 입력해주세요."),

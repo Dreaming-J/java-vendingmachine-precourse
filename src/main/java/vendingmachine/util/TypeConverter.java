@@ -1,6 +1,6 @@
 package vendingmachine.util;
 
-import static vendingmachine.Message.ErrorMsg.CONVERTING_NUMBER_ERROR;
+import static vendingmachine.message.ErrorMsg.CONVERTING_NUMBER_ERROR;
 
 public class TypeConverter {
 
