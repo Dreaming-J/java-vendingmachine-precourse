@@ -3,7 +3,8 @@ package vendingmachine.message;
 public enum ErrorMsg {
     CONVERTING_NUMBER_ERROR("유효하지 않은 숫자입니다. 다시 입력해주세요."),
     AMOUNT_ERROR("유효하지 않은 금액입니다. 다시 입력해주세요."),
-    STOCK_ERROR("유효하지 않은 재고 형식입니다. 다시 입력해주세요.");
+    STOCK_ERROR("유효하지 않은 재고 형식입니다. 다시 입력해주세요."),
+    ORDER_ERROR("유효하지 않은 주문입니다. 다시 입력해주세요.");
 
     private final String message;
 
