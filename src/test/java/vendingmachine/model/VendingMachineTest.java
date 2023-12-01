@@ -1,0 +1,36 @@
+package vendingmachine.model;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+public class VendingMachineTest {
+
+    @ParameterizedTest
+    @CsvSource(value = {"300,환타", "100,콜라"})
+    void 상품_구매_테스트(int amount, String name) {
+        List<Coin> coins = CoinGenerator.generateRandomCoins(300);
+        Map<Product, Integer> stock = StockGenerator.generateStock("[콜라,200,2];[사이다,100,1]");
+        Money inputAmount = new Money(amount);
+        VendingMachine vendingMachine = new VendingMachine(coins, stock, inputAmount);
+
+        assertThatThrownBy(() -> vendingMachine.buyProduct(name))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"[콜라,200,2];[사이다,500,1]-300-콜라", "[콜라,200,1]-1000-콜라"}, delimiter = '-')
+    void 잔돈_반환_테스트(String productDatas, int amount, String name) {
+        List<Coin> coins = CoinGenerator.generateRandomCoins(300);
+        Map<Product, Integer> stock = StockGenerator.generateStock(productDatas);
+        Money inputAmount = new Money(amount);
+        VendingMachine vendingMachine = new VendingMachine(coins, stock, inputAmount);
+
+        vendingMachine.buyProduct(name);
+        assertTrue(vendingMachine.isOver());
+    }
+}
