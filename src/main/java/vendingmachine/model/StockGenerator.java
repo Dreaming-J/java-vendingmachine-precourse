@@ -13,7 +13,7 @@ public class StockGenerator {
 
     private static final String SEMI_COLON = ";";
     private static final String COMMA = ",";
-    private static final String REGEX = "^(\\[[가-힣]+,[0-9]+,[0-9]+\\])(;\\[[가-힣]+,[0-9]+,[0-9]+\\])*$";
+    private static final String REGEX = "^(\\[[가-힣]+,[0-9]+,[1-9]{1}[0-9]*\\])(;\\[[가-힣]+,[0-9]+,[1-9]{1}[0-9]*\\])*$";
 
     public static Map<Product, Integer> generateStock(String productDatas) {
         validate(productDatas);
