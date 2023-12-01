@@ -21,7 +21,7 @@ public class StockGenerator {
         Map<Product, Integer> stock = new HashMap<>();
         for (List<String> productData : manufactureProducts(productDatas)) {
             String name = productData.get(0);
-            int price = toInt(productData.get(1));
+            Money price = new Money(toInt(productData.get(1)));
             int quantity = toInt(productData.get(2));
 
             stock.put(new Product(name, price), quantity);

@@ -20,7 +20,6 @@ public class CoinGenerator {
         } while (totalAmount > 0);
 
         return coins.stream()
-                .sorted()
                 .toList();
     }
 
