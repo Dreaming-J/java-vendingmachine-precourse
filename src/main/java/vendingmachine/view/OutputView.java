@@ -1,5 +1,6 @@
 package vendingmachine.view;
 
+import static vendingmachine.message.ViewMsg.PRINT_CHANGE;
 import static vendingmachine.message.ViewMsg.PRINT_COIN_BOX;
 import static vendingmachine.message.ViewMsg.PRINT_ERROR;
 import static vendingmachine.message.ViewMsg.PRINT_INPUT_AMOUNT;
@@ -20,5 +21,10 @@ public class OutputView {
 
     public void printInputAmount(Money inputAmount) {
         System.out.printf(PRINT_INPUT_AMOUNT.toString(), inputAmount);
+    }
+
+    public void printChange(CoinBox change) {
+        System.out.println(PRINT_CHANGE);
+        System.out.println(change);
     }
 }

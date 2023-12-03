@@ -29,6 +29,7 @@ public class MainController {
 
     private void quitVendingMachine(VendingMachine vendingMachine) {
         outputView.printInputAmount(vendingMachine.getInputAmount());
+        outputView.printChange(vendingMachine.returnChange());
     }
 
     private void buyProduct(VendingMachine vendingMachine) {
