@@ -7,6 +7,17 @@ import vendingmachine.view.OutputView;
 
 public class Repeat {
 
+    public static void repeat(Runnable inputReader) {
+        while (true) {
+            try {
+                inputReader.run();
+                return;
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e.getMessage());
+            }
+        }
+    }
+
     public static <T> T repeat(Supplier<T> inputReader) {
         while (true) {
             try {

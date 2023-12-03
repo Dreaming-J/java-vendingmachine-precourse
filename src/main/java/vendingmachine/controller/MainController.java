@@ -23,6 +23,22 @@ public class MainController {
 
     public void start() {
         VendingMachine vendingMachine = createVendingMachine();
+        buyProduct(vendingMachine);
+        quitVendingMachine(vendingMachine);
+    }
+
+    private void quitVendingMachine(VendingMachine vendingMachine) {
+        outputView.printInputAmount(vendingMachine.getInputAmount());
+    }
+
+    private void buyProduct(VendingMachine vendingMachine) {
+        while (vendingMachine.isContinue()) {
+            repeat(() -> {
+                outputView.printInputAmount(vendingMachine.getInputAmount());
+                String name = inputView.readNameOfProduct();
+                vendingMachine.sellProduct(name);
+            });
+        }
     }
 
     private VendingMachine createVendingMachine() {

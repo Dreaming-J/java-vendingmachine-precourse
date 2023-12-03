@@ -1,7 +1,7 @@
 package vendingmachine.model;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +16,7 @@ public class VendingMachineTest {
         Money inputAmount = new Money(amount);
         VendingMachine vendingMachine = new VendingMachine(coinBox, stock, inputAmount);
 
-        assertThatThrownBy(() -> vendingMachine.buyProduct(name))
+        assertThatThrownBy(() -> vendingMachine.sellProduct(name))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -28,7 +28,7 @@ public class VendingMachineTest {
         Money inputAmount = new Money(amount);
         VendingMachine vendingMachine = new VendingMachine(coinBox, stock, inputAmount);
 
-        vendingMachine.buyProduct(name);
-        assertTrue(vendingMachine.isOver());
+        vendingMachine.sellProduct(name);
+        assertFalse(vendingMachine.isContinue());
     }
 }

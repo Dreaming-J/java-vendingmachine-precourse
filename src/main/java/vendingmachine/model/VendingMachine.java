@@ -12,14 +12,18 @@ public class VendingMachine {
         this.inputAmount = inputAmount;
     }
 
-    public Product buyProduct(String name) {
+    public Money getInputAmount() {
+        return inputAmount;
+    }
+
+    public Product sellProduct(String name) {
         Product product = stock.pop(name, inputAmount);
         inputAmount.minus(product.price());
         return product;
     }
 
-    public boolean isOver() {
-        return stock.isSoldOut() || cantBuy();
+    public boolean isContinue() {
+        return !(stock.isSoldOut() || cantBuy());
     }
 
     private boolean cantBuy() {
@@ -27,7 +31,7 @@ public class VendingMachine {
                 .cantBuy(inputAmount);
     }
 
-    public CoinBox getChange() {
+    public CoinBox returnChange() {
         return coinBox.createChange(inputAmount);
     }
 }

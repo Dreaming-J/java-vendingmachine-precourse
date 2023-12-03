@@ -15,18 +15,30 @@ public class Stock {
     }
 
     public Product pop(String name, Money inputAmount) {
-        Product product = stock.keySet()
+        Product product = findProduct(name);
+        validatePop(product, inputAmount);
+        return pop(product);
+    }
+
+    private Product pop(Product product) {
+        stock.put(product, stock.get(product) - 1);
+
+        if (stock.get(product) == 0) {
+            stock.remove(product);
+        }
+
+        return product;
+    }
+
+    private Product findProduct(String name) {
+        return stock.keySet()
                 .stream()
                 .filter(o -> Objects.equals(o.name(), name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ORDER_ERROR.toString()));
-
-        validatePop(product, inputAmount);
-        stock.put(product, stock.get(product) - 1);
-        return product;
     }
 
-    public void validatePop(Product product, Money inputAmount) {
+    private void validatePop(Product product, Money inputAmount) {
         if (stock.get(product) == 0) {
             throw new IllegalArgumentException(ORDER_ERROR.toString());
         }
@@ -37,10 +49,8 @@ public class Stock {
     }
 
     public boolean isSoldOut() {
-        return stock.values()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .sum() == 0;
+        return stock.keySet()
+                .isEmpty();
     }
 
     public Product findWithMinPrice() {
