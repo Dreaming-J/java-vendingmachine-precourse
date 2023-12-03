@@ -15,7 +15,7 @@ public class StockGenerator {
     private static final String COMMA = ",";
     private static final String REGEX = "^(\\[[가-힣]+,[0-9]+,[1-9]{1}[0-9]*\\])(;\\[[가-힣]+,[0-9]+,[1-9]{1}[0-9]*\\])*$";
 
-    public static Map<Product, Integer> generateStock(String productDatas) {
+    public static Stock generateStock(String productDatas) {
         validate(productDatas);
 
         Map<Product, Integer> stock = new HashMap<>();
@@ -27,7 +27,7 @@ public class StockGenerator {
             stock.put(new Product(name, price), quantity);
         }
 
-        return stock;
+        return new Stock(stock);
     }
 
     private static void validate(String productDatas) {

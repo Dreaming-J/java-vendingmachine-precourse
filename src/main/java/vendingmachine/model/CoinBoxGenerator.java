@@ -2,25 +2,23 @@ package vendingmachine.model;
 
 import static vendingmachine.message.ErrorMsg.AMOUNT_ERROR;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
-public class CoinGenerator {
+public class CoinBoxGenerator {
 
     private static final int UNIT_COIN = 10;
 
-    public static List<Coin> generateRandomCoins(int totalAmount) {
+    public static CoinBox generateCoinBox(int totalAmount) {
         validate(totalAmount);
-        List<Coin> coins = new ArrayList<>();
+        Map<Coin, Integer> coinBox = Coin.createCoinMap();
 
         do {
             Coin coin = Coin.pickRandomCoin(totalAmount);
             totalAmount -= coin.getAmount();
-            coins.add(coin);
+            coinBox.put(coin, coinBox.getOrDefault(coin, 0) + 1);
         } while (totalAmount > 0);
 
-        return coins.stream()
-                .toList();
+        return new CoinBox(coinBox);
     }
 
     private static void validate(int totalAmount) {
