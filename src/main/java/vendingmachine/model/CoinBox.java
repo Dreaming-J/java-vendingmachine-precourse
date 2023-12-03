@@ -5,6 +5,8 @@ import java.util.StringJoiner;
 
 public class CoinBox {
 
+    private static final String LINE_BREAK = "\n";
+    private static final String STRING_FORMAT = "%s - %d개";
     private final Map<Coin, Integer> coinBox;
 
     public CoinBox(Map<Coin, Integer> coinBox) {
@@ -21,8 +23,8 @@ public class CoinBox {
 
     @Override
     public String toString() {
-        StringJoiner stringJoiner = new StringJoiner("\n");
-        coinBox.forEach((coin, count) -> stringJoiner.add(String.format("%s - %d개", coin, count)));
+        StringJoiner stringJoiner = new StringJoiner(LINE_BREAK);
+        coinBox.forEach((coin, count) -> stringJoiner.add(String.format(STRING_FORMAT, coin, count)));
         return stringJoiner.toString();
     }
 }

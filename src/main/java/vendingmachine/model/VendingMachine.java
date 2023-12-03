@@ -7,6 +7,7 @@ public class VendingMachine {
     private final Money inputAmount;
 
     public VendingMachine(CoinBox coinBox, Stock stock, Money inputAmount) {
+        coinBox.trim();
         this.coinBox = coinBox;
         this.stock = stock;
         this.inputAmount = inputAmount;
@@ -19,10 +20,11 @@ public class VendingMachine {
     }
 
     public boolean isOver() {
-        return stock.isSoldOut() & isCantBuy();
+        return stock.isSoldOut() || cantBuy();
     }
 
-    private boolean isCantBuy() {
-        return stock.findMinPrice().compareTo(inputAmount) > 0;
+    private boolean cantBuy() {
+        return stock.findWithMinPrice()
+                .cantBuy(inputAmount);
     }
 }

@@ -31,7 +31,7 @@ public class Stock {
             throw new IllegalArgumentException(ORDER_ERROR.toString());
         }
 
-        if (product.price().compareTo(inputAmount) > 0) {
+        if (product.cantBuy(inputAmount)) {
             throw new IllegalArgumentException(ORDER_ERROR.toString());
         }
     }
@@ -43,11 +43,10 @@ public class Stock {
                 .sum() == 0;
     }
 
-    public Money findMinPrice() {
+    public Product findWithMinPrice() {
         return stock.keySet()
                 .stream()
-                .map(Product::price)
-                .min(Comparator.comparing(x -> x))
+                .min(Comparator.comparing(Product::price))
                 .get();
     }
 }
