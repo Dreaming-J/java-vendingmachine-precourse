@@ -1,5 +1,6 @@
 package vendingmachine.model;
 
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -13,12 +14,23 @@ public class CoinBox {
         this.coinBox = coinBox;
     }
 
-    public void trim() {
-        coinBox.forEach((coin, count) -> {
-            if (count == 0) {
-                coinBox.remove(coin);
+    public CoinBox createChange(Money inputAmount) {
+        Map<Coin, Integer> change = new EnumMap<>(Coin.class);
+
+        for (Coin coin : coinBox.keySet()) {
+            Money money = new Money(coin);
+            while (canPop(coin) & inputAmount.compareTo(money) >= 0) {
+                change.put(coin, change.getOrDefault(coin, 0) + 1);
+                coinBox.put(coin, coinBox.get(coin) - 1);
+                inputAmount.minus(money);
             }
-        });
+        }
+
+        return new CoinBox(change);
+    }
+
+    private boolean canPop(Coin coin) {
+        return coinBox.get(coin) != 0;
     }
 
     @Override

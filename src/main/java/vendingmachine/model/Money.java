@@ -14,6 +14,10 @@ public class Money implements Comparable<Money> {
         this.amount = amount;
     }
 
+    public Money(Coin coin) {
+        this.amount = coin.getAmount();
+    }
+
     private void validate(int amount) {
         if (amount < MIN_PRICE || amount % UNIT_PRICE != 0) {
             throw new IllegalArgumentException(AMOUNT_ERROR.toString());
