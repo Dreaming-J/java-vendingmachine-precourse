@@ -7,7 +7,7 @@ import vendingmachine.model.CoinBox;
 public class OutputView {
 
     public static void printError(String error) {
-        System.out.printf("[ERROR] %s%n%n", error);
+        System.out.printf("[ERROR] %s%n", error);
     }
 
     public void printCoinBox(CoinBox coinBox) {

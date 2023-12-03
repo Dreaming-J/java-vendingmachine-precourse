@@ -1,5 +1,6 @@
 package vendingmachine.view;
 
+import static vendingmachine.message.ViewMsg.READ_INPUT_AMOUNT;
 import static vendingmachine.message.ViewMsg.READ_STOCK;
 import static vendingmachine.message.ViewMsg.READ_VENDING_MACHINE_AMOUNT;
 import static vendingmachine.util.TypeConverter.toInt;
@@ -16,5 +17,10 @@ public class InputView {
     public String readStock() {
         System.out.println(READ_STOCK);
         return Console.readLine();
+    }
+
+    public int readInputAmount() {
+        System.out.println(READ_INPUT_AMOUNT);
+        return toInt(Console.readLine());
     }
 }
