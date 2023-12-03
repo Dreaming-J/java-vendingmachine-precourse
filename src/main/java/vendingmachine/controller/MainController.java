@@ -4,6 +4,8 @@ import static vendingmachine.util.Repeat.repeat;
 
 import vendingmachine.model.CoinBox;
 import vendingmachine.model.CoinBoxGenerator;
+import vendingmachine.model.Stock;
+import vendingmachine.model.StockGenerator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -22,10 +24,22 @@ public class MainController {
     }
 
     private void createVendingMachine() {
-        CoinBox coinBox = repeat(() -> {
+        CoinBox coinBox = createCoinBox();
+        outputView.printCoinBox(coinBox);
+        Stock stock = createStock();
+    }
+
+    private CoinBox createCoinBox() {
+        return repeat(() -> {
             int amount = inputView.readVendingMachineAmount();
             return CoinBoxGenerator.generateCoinBox(amount);
         });
-        outputView.printCoinBox(coinBox);
+    }
+
+    private Stock createStock() {
+        return repeat(() -> {
+            String productDatas = inputView.readStock();
+            return StockGenerator.generateStock(productDatas);
+        });
     }
 }
