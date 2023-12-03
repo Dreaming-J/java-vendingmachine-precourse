@@ -5,13 +5,16 @@ import static vendingmachine.util.Repeat.repeat;
 import vendingmachine.model.CoinBox;
 import vendingmachine.model.CoinBoxGenerator;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class MainController {
 
     private final InputView inputView;
+    private final OutputView outputView;
 
     public MainController() {
         inputView = new InputView();
+        outputView = new OutputView();
     }
 
     public void start() {
@@ -23,6 +26,6 @@ public class MainController {
             int amount = inputView.readVendingMachineAmount();
             return CoinBoxGenerator.generateCoinBox(amount);
         });
-        
+        outputView.printCoinBox(coinBox);
     }
 }
